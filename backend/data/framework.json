@@ -1,0 +1,1263 @@
+{
+  "axes": [
+    {
+      "name": "Manage",
+      "code": "manage",
+      "display_order": 1
+    },
+    {
+      "name": "Analyze",
+      "code": "analyze",
+      "display_order": 2
+    },
+    {
+      "name": "Improve",
+      "code": "improve",
+      "display_order": 3
+    }
+  ],
+  "questions": [
+    {
+      "question_id": "Q1",
+      "axis": "Manage",
+      "question_text": "When priorities are discussed, how visible is the customer point of view?",
+      "display_order": 1,
+      "options": [
+        {
+          "answer": "It is part of most discussions",
+          "score": 4.0,
+          "option_code": "A1"
+        },
+        {
+          "answer": "It is raised in some discussions",
+          "score": 3.0,
+          "option_code": "A2"
+        },
+        {
+          "answer": "It comes up mainly when there is a problem",
+          "score": 2.0,
+          "option_code": "A3"
+        },
+        {
+          "answer": "It is rarely part of the conversation",
+          "score": 1.0,
+          "option_code": "A4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q2",
+      "axis": "Manage",
+      "question_text": "Is there a clear plan to improve the customer experience?",
+      "display_order": 2,
+      "options": [
+        {
+          "answer": "Yes, and people know it",
+          "score": 4.0,
+          "option_code": "B1"
+        },
+        {
+          "answer": "Yes, but only some teams know it",
+          "score": 3.0,
+          "option_code": "B2"
+        },
+        {
+          "answer": "There are ideas, but no clear plan",
+          "score": 2.0,
+          "option_code": "B3"
+        },
+        {
+          "answer": "No clear plan",
+          "score": 1.0,
+          "option_code": "B4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q3",
+      "axis": "Manage",
+      "question_text": "Who usually takes the lead on customer experience topics?",
+      "display_order": 3,
+      "options": [
+        {
+          "answer": "One clear person or team",
+          "score": 4.0,
+          "option_code": "C1"
+        },
+        {
+          "answer": "A few teams share it",
+          "score": 3.0,
+          "option_code": "C2"
+        },
+        {
+          "answer": "It changes depending on the topic",
+          "score": 2.0,
+          "option_code": "C3"
+        },
+        {
+          "answer": "It is not really clear",
+          "score": 1.0,
+          "option_code": "C4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q4",
+      "axis": "Manage",
+      "question_text": "How do people learn what a good customer experience looks like here?",
+      "display_order": 4,
+      "options": [
+        {
+          "answer": "Through clear guidance and regular support",
+          "score": 4.0,
+          "option_code": "D1"
+        },
+        {
+          "answer": "Through some guidance, depending on the team",
+          "score": 3.0,
+          "option_code": "D2"
+        },
+        {
+          "answer": "Mostly by learning from others around them",
+          "score": 2.0,
+          "option_code": "D3"
+        },
+        {
+          "answer": "There is no real guidance today",
+          "score": 1.0,
+          "option_code": "D4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q5",
+      "axis": "Analyze",
+      "question_text": "How often do you collect customer feedback?",
+      "display_order": 5,
+      "options": [
+        {
+          "answer": "Continuously or after key interactions",
+          "score": 4.0,
+          "option_code": "E1"
+        },
+        {
+          "answer": "Regularly, on a planned basis",
+          "score": 3.0,
+          "option_code": "E2"
+        },
+        {
+          "answer": "From time to time",
+          "score": 2.0,
+          "option_code": "E3"
+        },
+        {
+          "answer": "Only when an issue comes up",
+          "score": 1.0,
+          "option_code": "E4"
+        },
+        {
+          "answer": "We do not collect it",
+          "score": 0.0,
+          "option_code": "E5"
+        }
+      ]
+    },
+    {
+      "question_id": "Q6",
+      "axis": "Analyze",
+      "question_text": "Once feedback is collected, what usually happens next?",
+      "display_order": 6,
+      "options": [
+        {
+          "answer": "It is reviewed, analyzed, and turned into actions",
+          "score": 4.0,
+          "option_code": "F1"
+        },
+        {
+          "answer": "It is reviewed and summarized",
+          "score": 3.0,
+          "option_code": "F2"
+        },
+        {
+          "answer": "It is looked at case by case",
+          "score": 2.0,
+          "option_code": "F3"
+        },
+        {
+          "answer": "It is stored, but not really used",
+          "score": 1.0,
+          "option_code": "F4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q7",
+      "axis": "Analyze",
+      "question_text": "Which journeys or moments do you track today?",
+      "display_order": 7,
+      "options": [
+        {
+          "answer": "End-to-end journeys across several touchpoints",
+          "score": 4.0,
+          "option_code": "G1"
+        },
+        {
+          "answer": "A few important journeys",
+          "score": 3.0,
+          "option_code": "G2"
+        },
+        {
+          "answer": "Individual touchpoints only",
+          "score": 2.0,
+          "option_code": "G3"
+        },
+        {
+          "answer": "Mostly service or complaint moments",
+          "score": 1.0,
+          "option_code": "G4"
+        },
+        {
+          "answer": "We do not really track journeys today",
+          "score": 0.0,
+          "option_code": "G5"
+        }
+      ]
+    },
+    {
+      "question_id": "Q8",
+      "axis": "Analyze",
+      "question_text": "How often is your view of the customer journey updated?",
+      "display_order": 8,
+      "options": [
+        {
+          "answer": "Regularly",
+          "score": 4.0,
+          "option_code": "H1"
+        },
+        {
+          "answer": "Sometimes",
+          "score": 3.0,
+          "option_code": "H2"
+        },
+        {
+          "answer": "Rarely",
+          "score": 2.0,
+          "option_code": "H3"
+        },
+        {
+          "answer": "It is not updated in a structured way",
+          "score": 1.0,
+          "option_code": "H4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q9",
+      "axis": "Analyze",
+      "question_text": "How do you decide which journeys or moments matter most?",
+      "display_order": 9,
+      "options": [
+        {
+          "answer": "Using clear criteria based on impact and evidence",
+          "score": 4.0,
+          "option_code": "I1"
+        },
+        {
+          "answer": "Based on a mix of data and judgment",
+          "score": 3.0,
+          "option_code": "I2"
+        },
+        {
+          "answer": "Mostly based on internal views",
+          "score": 2.0,
+          "option_code": "I3"
+        },
+        {
+          "answer": "There is no clear way today",
+          "score": 1.0,
+          "option_code": "I4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "axis": "Improve",
+      "question_text": "When a pain point shows up, what usually happens?",
+      "display_order": 10,
+      "options": [
+        {
+          "answer": "It turns into action quickly",
+          "score": 4.0,
+          "option_code": "E1"
+        },
+        {
+          "answer": "It usually gets picked up",
+          "score": 3.0,
+          "option_code": "E2"
+        },
+        {
+          "answer": "It may be discussed first",
+          "score": 2.0,
+          "option_code": "E3"
+        },
+        {
+          "answer": "It often stays unresolved",
+          "score": 1.0,
+          "option_code": "E4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "axis": "Improve",
+      "question_text": "After a change is made, how do you know if it really helped?",
+      "display_order": 11,
+      "options": [
+        {
+          "answer": "We check results clearly",
+          "score": 4.0,
+          "option_code": "F1"
+        },
+        {
+          "answer": "We usually review the biggest changes",
+          "score": 3.0,
+          "option_code": "F2"
+        },
+        {
+          "answer": "We get a general sense of whether it worked",
+          "score": 2.0,
+          "option_code": "F3"
+        },
+        {
+          "answer": "We rarely go back and check",
+          "score": 1.0,
+          "option_code": "F4"
+        }
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "axis": "Improve",
+      "question_text": "When improvements are made, how is their business value measured?",
+      "display_order": 12,
+      "options": [
+        {
+          "answer": "Through a defined approach",
+          "score": 4.0,
+          "option_code": "G1"
+        },
+        {
+          "answer": "In some cases",
+          "score": 3.0,
+          "option_code": "G2"
+        },
+        {
+          "answer": "Informally",
+          "score": 2.0,
+          "option_code": "G3"
+        },
+        {
+          "answer": "It is not measured today",
+          "score": 1.0,
+          "option_code": "G4"
+        }
+      ]
+    }
+  ],
+  "axis_bands": {
+    "Manage": {
+      "question_count": 4,
+      "min_possible": 4,
+      "max_possible": 16,
+      "low": "4 - 9",
+      "medium": "10 - 12",
+      "high": "13 - 16"
+    },
+    "Analyze": {
+      "question_count": 5,
+      "min_possible": 3,
+      "max_possible": 20,
+      "low": "3 - 11",
+      "medium": "12 - 15",
+      "high": "16 - 20"
+    },
+    "Improve": {
+      "question_count": 3,
+      "min_possible": 3,
+      "max_possible": 12,
+      "low": "3 - 7",
+      "medium": "8 - 9",
+      "high": "10 - 12"
+    }
+  },
+  "axis_recommendations": {
+    "Manage": [
+      {
+        "level": "Low",
+        "actual_score_range": "4 - 9",
+        "description": "No clear direction yet; ownership and guidance are limited or uneven.",
+        "recommendations": "This usually means the basics are not yet fully in place. Direction may be unclear, ownership may be fragmented, and teams may not have enough guidance.\n\nPriority actions:\n- Define one clear owner or a small leading group\n- Set a simple shared direction for the customer experience\n- Make leadership involvement more visible\n- Give teams clearer guidance on what good looks like\n- Bring the customer perspective more often into team decisions"
+      },
+      {
+        "level": "Medium",
+        "actual_score_range": "10 - 12",
+        "description": "Some structure exists, but not consistently across teams.",
+        "recommendations": "This usually means some foundations exist, but not in a consistent way across the organization.\n\nPriority actions:\n- Align teams around one shared direction\n- Clarify responsibilities and decision roles\n- Strengthen leadership follow-up on key topics\n- Standardize guidance and support across teams\n- Create more regular ways for teams to work together"
+      },
+      {
+        "level": "High",
+        "actual_score_range": "13 - 16",
+        "description": "Clear direction and ownership are in place.",
+        "recommendations": "This usually means direction, ownership, and support are already present. The focus now is on making them stronger and more sustainable.\n\nPriority actions:\n- Strengthen governance and accountability\n- Embed customer thinking into daily decisions\n- Keep leadership engaged over time\n- Scale good practices across teams\n- Connect direction more closely to delivery"
+      }
+    ],
+    "Analyze": [
+      {
+        "level": "Low",
+        "actual_score_range": "3 - 11",
+        "description": "Limited visibility on experience, feedback, and journeys.",
+        "recommendations": "This usually means the organization has only a limited view of the experience. Feedback may be collected occasionally, journeys may be unclear, and decisions may rely more on opinion than evidence.\n\nPriority actions:\n- Set up regular ways to gather feedback\n- Identify a few key journey moments to track\n- Create a shared view of what customers go through\n- Introduce a basic set of measures across main channels\n- Build a simple routine to review and use insights"
+      },
+      {
+        "level": "Medium",
+        "actual_score_range": "12 - 15",
+        "description": "Some insight exists, but it is still partial or fragmented.",
+        "recommendations": "This usually means some feedback, measurement, and journey tracking are in place, but the view is still partial or fragmented.\n\nPriority actions:\n- Bring feedback sources together more consistently\n- Improve the way insights are reviewed and shared\n- Refresh journey views more often\n- Use clearer criteria to decide which moments matter most\n- Help teams work from one shared picture"
+      },
+      {
+        "level": "High",
+        "actual_score_range": "16 - 20",
+        "description": "Strong understanding of the experience across feedback, journeys, and measures.",
+        "recommendations": "This usually means the organization has a strong view of feedback, journeys, and measures. The next step is to make insight sharper and more actionable.\n\nPriority actions:\n- Strengthen root-cause analysis\n- Connect journey, channel, and operational views\n- Make measures more useful for action, not only reporting\n- Improve cross-team visibility\n- Use insight to predict and prevent issues earlier"
+      }
+    ],
+    "Improve": [
+      {
+        "level": "Low",
+        "actual_score_range": "3 - 7",
+        "description": "Issues are identified, but they do not consistently turn into action.",
+        "recommendations": "This usually means pain points are visible, but they do not consistently turn into action. Follow-up may be weak, results may not be checked, and business value may not be measured.\n\nPriority actions:\n- Create a simple action path for known issues\n- Make ownership visible from the start\n- Follow actions through to completion\n- Check whether changes actually helped\n- Start linking improvements to business value"
+      },
+      {
+        "level": "Medium",
+        "actual_score_range": "8 - 9",
+        "description": "Improvements happen, but not always in a repeatable way.",
+        "recommendations": "This usually means improvements happen, but not always in the same way. Some actions are tracked and some results are reviewed, but the approach is still uneven.\n\nPriority actions:\n- Make the path from issue to action more consistent\n- Define a clearer way to review impact\n- Measure business value for the main improvements\n- Reduce dependence on individual effort\n- Turn improvement into a regular operating habit"
+      },
+      {
+        "level": "High",
+        "actual_score_range": "10 - 12",
+        "description": "Improvements are acted on, reviewed, and measured in many cases.",
+        "recommendations": "This usually means the organization can move from pain points to action, review whether changes worked, and show value in many cases.\n\nPriority actions:\n- Scale successful improvements across teams and journeys\n- Make learning from changes more systematic\n- Link improvements more tightly to value creation\n- Strengthen decision-making with evidence\n- Move from isolated fixes to ongoing improvement cycles"
+      }
+    ]
+  },
+  "answer_recommendations": [
+    {
+      "axis": "Manage",
+      "question_id": "Q1",
+      "question_text": "When priorities are discussed, how visible is the customer point of view?",
+      "option_code": "A1",
+      "selected_answer": "It is part of most discussions",
+      "what_this_suggests": "The customer perspective is already present in decision-making.",
+      "detailed_recommendation": "Keep this strength visible. Build on it by making customer impact part of decision templates, project reviews, and leadership discussions so it stays consistent even when priorities shift.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q1",
+      "question_text": "When priorities are discussed, how visible is the customer point of view?",
+      "option_code": "A2",
+      "selected_answer": "It is raised in some discussions",
+      "what_this_suggests": "The customer perspective is present, but not yet consistent.",
+      "detailed_recommendation": "Create a simple habit that makes the customer perspective harder to miss. For example, add one customer-focused question to steering meetings, business reviews, and project sign-off moments.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q1",
+      "question_text": "When priorities are discussed, how visible is the customer point of view?",
+      "option_code": "A3",
+      "selected_answer": "It comes up mainly when there is a problem",
+      "what_this_suggests": "The organization is still reacting more than planning ahead.",
+      "detailed_recommendation": "Shift from reactive to proactive discussions. Use regular feedback reviews, journey reviews, or monthly pain-point discussions so customer topics come up before issues escalate.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q1",
+      "question_text": "When priorities are discussed, how visible is the customer point of view?",
+      "option_code": "A4",
+      "selected_answer": "It is rarely part of the conversation",
+      "what_this_suggests": "Customer topics are not yet part of the normal decision rhythm.",
+      "detailed_recommendation": "Start small but make it visible. Introduce a basic customer lens in leadership and team meetings, such as one recent pain point, one customer trend, or one journey issue to review regularly.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q2",
+      "question_text": "Is there a clear plan to improve the customer experience?",
+      "option_code": "B1",
+      "selected_answer": "Yes, and people know it",
+      "what_this_suggests": "There is a shared direction in place.",
+      "detailed_recommendation": "Keep the plan alive by linking it to owners, milestones, and a small set of measures. Review progress regularly so it stays practical and does not become a static document.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q2",
+      "question_text": "Is there a clear plan to improve the customer experience?",
+      "option_code": "B2",
+      "selected_answer": "Yes, but only some teams know it",
+      "what_this_suggests": "The direction exists, but it is not yet fully shared.",
+      "detailed_recommendation": "Translate the plan into simple messages for each team: what matters, why it matters, and what each team can influence. This usually improves alignment quickly.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q2",
+      "question_text": "Is there a clear plan to improve the customer experience?",
+      "option_code": "B3",
+      "selected_answer": "There are ideas, but no clear plan",
+      "what_this_suggests": "Intent exists, but it has not been turned into a shared roadmap.",
+      "detailed_recommendation": "Turn scattered ideas into a short improvement plan with three parts: priority focus areas, owners, and the first actions to launch. Keep it simple and visible.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q2",
+      "question_text": "Is there a clear plan to improve the customer experience?",
+      "option_code": "B4",
+      "selected_answer": "No clear plan",
+      "what_this_suggests": "There is no shared direction yet.",
+      "detailed_recommendation": "Start with a lightweight plan rather than a full program. Define the main pain points to focus on, one sponsor, and a short list of priority actions for the next few months.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q3",
+      "question_text": "Who usually takes the lead on customer experience topics?",
+      "option_code": "C1",
+      "selected_answer": "One clear person or team",
+      "what_this_suggests": "Ownership is established.",
+      "detailed_recommendation": "Make sure this role has enough visibility and support to coordinate across teams. Clear ownership works best when paired with leadership backing and a regular decision forum.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q3",
+      "question_text": "Who usually takes the lead on customer experience topics?",
+      "option_code": "C2",
+      "selected_answer": "A few teams share it",
+      "what_this_suggests": "Responsibility exists, but shared ownership may create gaps.",
+      "detailed_recommendation": "Clarify who leads, who contributes, and who decides. A simple RACI or role note can reduce confusion and speed up action.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q3",
+      "question_text": "Who usually takes the lead on customer experience topics?",
+      "option_code": "C3",
+      "selected_answer": "It changes depending on the topic",
+      "what_this_suggests": "Ownership is flexible, but may be inconsistent.",
+      "detailed_recommendation": "Define a stable coordination point even if business ownership changes by topic. This helps maintain continuity across issues, journeys, and improvement work.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q3",
+      "question_text": "Who usually takes the lead on customer experience topics?",
+      "option_code": "C4",
+      "selected_answer": "It is not really clear",
+      "what_this_suggests": "A lack of ownership will slow down action and follow-through.",
+      "detailed_recommendation": "Name a clear sponsor or coordinating team. Even a small, part-time ownership model is better than leaving the topic fully informal.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q4",
+      "question_text": "How do people learn what a good customer experience looks like here?",
+      "option_code": "D1",
+      "selected_answer": "Through clear guidance and regular support",
+      "what_this_suggests": "Teams are being enabled in a structured way.",
+      "detailed_recommendation": "Keep this practical by refreshing guidance with real examples, success stories, and role-based coaching so it stays relevant to daily work.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q4",
+      "question_text": "How do people learn what a good customer experience looks like here?",
+      "option_code": "D2",
+      "selected_answer": "Through some guidance, depending on the team",
+      "what_this_suggests": "Support exists, but not equally across the organization.",
+      "detailed_recommendation": "Identify where guidance is strongest and reuse those materials more widely. A small core toolkit can help reduce uneven maturity between teams.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q4",
+      "question_text": "How do people learn what a good customer experience looks like here?",
+      "option_code": "D3",
+      "selected_answer": "Mostly by learning from others around them",
+      "what_this_suggests": "Learning happens informally, which may create uneven standards.",
+      "detailed_recommendation": "Turn informal know-how into simple shared guidance. This can be as basic as a short playbook, examples of good practice, or onboarding support for key teams.",
+      "priority": "High"
+    },
+    {
+      "axis": "Manage",
+      "question_id": "Q4",
+      "question_text": "How do people learn what a good customer experience looks like here?",
+      "option_code": "D4",
+      "selected_answer": "There is no real guidance today",
+      "what_this_suggests": "Expectations are likely unclear across teams.",
+      "detailed_recommendation": "Start by defining what good looks like in a few priority moments or roles. Keep it simple, visible, and tied to real customer situations so teams can act on it.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q5",
+      "question_text": "How often do you collect customer feedback?",
+      "option_code": "E1",
+      "selected_answer": "Continuously or after key interactions",
+      "what_this_suggests": "Feedback is captured consistently and close to real moments.",
+      "detailed_recommendation": "Keep the rhythm, but make sure it stays purposeful. Review whether you are capturing the right moments, avoiding survey fatigue, and linking feedback back to the journeys that matter most.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q5",
+      "question_text": "How often do you collect customer feedback?",
+      "option_code": "E2",
+      "selected_answer": "Regularly, on a planned basis",
+      "what_this_suggests": "There is a listening rhythm in place, but it may miss some key moments.",
+      "detailed_recommendation": "Look at where feedback is collected today and where important moments are still invisible. Often the next step is not collecting more everywhere, but collecting at the moments that have the biggest impact on the experience.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q5",
+      "question_text": "How often do you collect customer feedback?",
+      "option_code": "E3",
+      "selected_answer": "From time to time",
+      "what_this_suggests": "Customer input is available, but not often enough to build a stable view.",
+      "detailed_recommendation": "Create a lighter but more regular listening rhythm. Start with a few recurring touchpoints or key interactions so teams can see patterns over time rather than isolated comments.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q5",
+      "question_text": "How often do you collect customer feedback?",
+      "option_code": "E4",
+      "selected_answer": "Only when an issue comes up",
+      "what_this_suggests": "The organization is mostly hearing from customers when something goes wrong.",
+      "detailed_recommendation": "Move from reactive listening to more balanced listening. Keep complaint-based input, but add a few regular feedback moments so teams can understand the experience before issues escalate.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q5",
+      "question_text": "How often do you collect customer feedback?",
+      "option_code": "E5",
+      "selected_answer": "We do not collect it",
+      "what_this_suggests": "There is no structured listening approach in place today.",
+      "detailed_recommendation": "Start simple. Choose one or two critical moments in the customer journey and create a basic way to collect input there. The goal is not to launch a large program immediately, but to begin building a regular signal.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q6",
+      "question_text": "Once feedback is collected, what usually happens next?",
+      "option_code": "F1",
+      "selected_answer": "It is reviewed, analyzed, and turned into actions",
+      "what_this_suggests": "Feedback is already being used as a source of insight and action.",
+      "detailed_recommendation": "Keep strengthening the loop between listening and action. Make sure teams can see not just the comments themselves, but the patterns, root causes, and priorities that come out of them.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q6",
+      "question_text": "Once feedback is collected, what usually happens next?",
+      "option_code": "F2",
+      "selected_answer": "It is reviewed and summarized",
+      "what_this_suggests": "Feedback is being looked at, but not always turned into clear action.",
+      "detailed_recommendation": "Push the process one step further. In addition to summary reports, define who reviews themes, who decides what matters, and what kind of actions should follow.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q6",
+      "question_text": "Once feedback is collected, what usually happens next?",
+      "option_code": "F3",
+      "selected_answer": "It is looked at case by case",
+      "what_this_suggests": "The organization is responding to individual signals, but not yet building a broader view.",
+      "detailed_recommendation": "Introduce a regular theme review. Even a monthly discussion of recurring issues, repeated comments, or low-performing moments can shift the organization from case-by-case reaction to insight-led improvement.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q6",
+      "question_text": "Once feedback is collected, what usually happens next?",
+      "option_code": "F4",
+      "selected_answer": "It is stored, but not really used",
+      "what_this_suggests": "Feedback is available, but it is not yet helping teams understand the experience.",
+      "detailed_recommendation": "Focus on use, not volume. Create a simple review rhythm with owners and one clear output: what did we learn, what matters most, and what should happen next.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q7",
+      "question_text": "Which journeys or moments do you track today?",
+      "option_code": "G1",
+      "selected_answer": "End-to-end journeys across several touchpoints",
+      "what_this_suggests": "The organization is looking at the experience across multiple steps and channels.",
+      "detailed_recommendation": "Build on this by keeping those journeys practical: link them to measures, feedback, and known pain points so they remain useful in decision-making, not just documentation.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q7",
+      "question_text": "Which journeys or moments do you track today?",
+      "option_code": "G2",
+      "selected_answer": "A few important journeys",
+      "what_this_suggests": "There is focus on the main journeys, which is often a strong starting point.",
+      "detailed_recommendation": "Make sure the chosen journeys truly reflect where value and friction are highest. Over time, add missing journeys only when the current ones are actively used.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q7",
+      "question_text": "Which journeys or moments do you track today?",
+      "option_code": "G3",
+      "selected_answer": "Individual touchpoints only",
+      "what_this_suggests": "The view is still fragmented around separate moments rather than the full journey.",
+      "detailed_recommendation": "Start connecting touchpoints into a simple end-to-end journey view. Even a basic map of the steps before and after a key interaction can reveal where issues really begin.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q7",
+      "question_text": "Which journeys or moments do you track today?",
+      "option_code": "G4",
+      "selected_answer": "Mostly service or complaint moments",
+      "what_this_suggests": "Journey understanding is currently shaped mainly by issues and complaints.",
+      "detailed_recommendation": "Balance the view by adding moments outside of service recovery. This helps teams understand not only where things fail, but also where expectations are formed and trust is built.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q7",
+      "question_text": "Which journeys or moments do you track today?",
+      "option_code": "G5",
+      "selected_answer": "We do not really track journeys today",
+      "what_this_suggests": "There is little shared view of what customers go through end to end.",
+      "detailed_recommendation": "Pick one priority journey and map it simply. Focus on the main steps, handoffs, and pain points. A single usable journey view is often more valuable than broad but unused mapping work.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q8",
+      "question_text": "How often is your view of the customer journey updated?",
+      "option_code": "H1",
+      "selected_answer": "Regularly",
+      "what_this_suggests": "The journey view stays alive and can keep pace with change.",
+      "detailed_recommendation": "Keep this habit linked to evidence. The best updates are not only calendar-based, but also triggered by new feedback, channel changes, or shifts in customer behavior.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q8",
+      "question_text": "How often is your view of the customer journey updated?",
+      "option_code": "H2",
+      "selected_answer": "Sometimes",
+      "what_this_suggests": "Journey knowledge is refreshed, but not in a regular enough way to support all decisions.",
+      "detailed_recommendation": "Set a lighter review rhythm that teams can sustain. Even a quarterly review of one or two key journeys can make the view more useful over time.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q8",
+      "question_text": "How often is your view of the customer journey updated?",
+      "option_code": "H3",
+      "selected_answer": "Rarely",
+      "what_this_suggests": "The journey view risks becoming outdated and less useful for action.",
+      "detailed_recommendation": "Choose a regular point to revisit the journey, especially after major process, channel, or policy changes. The goal is to keep the view usable, not perfect.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q8",
+      "question_text": "How often is your view of the customer journey updated?",
+      "option_code": "H4",
+      "selected_answer": "It is not updated in a structured way",
+      "what_this_suggests": "Journey understanding depends too much on informal knowledge and memory.",
+      "detailed_recommendation": "Introduce a simple review trigger. For example, revisit the journey after repeated complaints, a drop in performance, or a major operational change.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q9",
+      "question_text": "How do you decide which journeys or moments matter most?",
+      "option_code": "I1",
+      "selected_answer": "Using clear criteria based on impact and evidence",
+      "what_this_suggests": "Priorities are set using a mature, evidence-based approach.",
+      "detailed_recommendation": "Keep the criteria visible and consistent. Make sure teams understand how customer impact, business value, and evidence come together when priorities are chosen.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q9",
+      "question_text": "How do you decide which journeys or moments matter most?",
+      "option_code": "I2",
+      "selected_answer": "Based on a mix of data and judgment",
+      "what_this_suggests": "There is some structure in prioritization, but it may still vary by team or context.",
+      "detailed_recommendation": "Tighten the approach by agreeing on a few shared criteria. Even a simple decision lens can improve consistency across teams and reduce debate based only on opinion.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q9",
+      "question_text": "How do you decide which journeys or moments matter most?",
+      "option_code": "I3",
+      "selected_answer": "Mostly based on internal views",
+      "what_this_suggests": "Priorities are driven more by internal perspective than by evidence from the experience itself.",
+      "detailed_recommendation": "Bring customer and operational evidence into prioritization discussions. A few shared measures, comments, or journey pain points can quickly improve the quality of decisions.",
+      "priority": "High"
+    },
+    {
+      "axis": "Analyze",
+      "question_id": "Q9",
+      "question_text": "How do you decide which journeys or moments matter most?",
+      "option_code": "I4",
+      "selected_answer": "There is no clear way today",
+      "what_this_suggests": "There is no shared prioritization logic in place.",
+      "detailed_recommendation": "Start with a simple framework: what is affecting customers most, what is affecting the business most, and where action is realistic. This creates a clearer basis for deciding where to focus first.",
+      "priority": "High"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q10",
+      "question_text": "When a pain point shows up, what usually happens?",
+      "option_code": "E1",
+      "selected_answer": "It turns into action quickly",
+      "what_this_suggests": "Issues are moving into action with relatively little friction.",
+      "detailed_recommendation": "Protect this speed by making the action path repeatable. Define how issues are logged, who picks them up, and how teams know when a pain point has moved into delivery.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q10",
+      "question_text": "When a pain point shows up, what usually happens?",
+      "option_code": "E2",
+      "selected_answer": "It usually gets picked up",
+      "what_this_suggests": "There is a response pattern, but not always the same one.",
+      "detailed_recommendation": "Reduce variation in the response path. A simple triage process with owners, timeframes, and escalation rules will make improvement more reliable.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q10",
+      "question_text": "When a pain point shows up, what usually happens?",
+      "option_code": "E3",
+      "selected_answer": "It may be discussed first",
+      "what_this_suggests": "Pain points are visible, but action may slow down at the discussion stage.",
+      "detailed_recommendation": "Create a clearer bridge from discussion to action. For example, agree on what qualifies for action, who decides, and what the first next step should be after a pain point is raised.",
+      "priority": "High"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q10",
+      "question_text": "When a pain point shows up, what usually happens?",
+      "option_code": "E4",
+      "selected_answer": "It often stays unresolved",
+      "what_this_suggests": "Known issues are not consistently turning into action.",
+      "detailed_recommendation": "Start with a simple action loop: capture the pain point, assign an owner, define the next step, and review open items regularly. This is often the fastest way to unblock progress.",
+      "priority": "High"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q11",
+      "question_text": "After a change is made, how do you know if it really helped?",
+      "option_code": "F1",
+      "selected_answer": "We check results clearly",
+      "what_this_suggests": "Impact checking is already part of the way of working.",
+      "detailed_recommendation": "Keep this strength and make it visible. Use before-and-after measures, feedback trends, or journey outcomes so teams can learn faster from what works.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q11",
+      "question_text": "After a change is made, how do you know if it really helped?",
+      "option_code": "F2",
+      "selected_answer": "We usually review the biggest changes",
+      "what_this_suggests": "Some impact review is in place, but mainly for larger initiatives.",
+      "detailed_recommendation": "Expand this habit to more day-to-day improvements. A lightweight review for smaller changes can improve learning without adding much overhead.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q11",
+      "question_text": "After a change is made, how do you know if it really helped?",
+      "option_code": "F3",
+      "selected_answer": "We get a general sense of whether it worked",
+      "what_this_suggests": "Learning is happening informally rather than through evidence.",
+      "detailed_recommendation": "Move from intuition to a simple evidence base. Choose one or two measures per improvement so teams can tell whether the change truly helped.",
+      "priority": "High"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q11",
+      "question_text": "After a change is made, how do you know if it really helped?",
+      "option_code": "F4",
+      "selected_answer": "We rarely go back and check",
+      "what_this_suggests": "The loop is not really closed after implementation.",
+      "detailed_recommendation": "Introduce a light post-change review. Even one follow-up check after launch can improve learning, help teams adjust faster, and avoid repeating the same issues.",
+      "priority": "High"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q12",
+      "question_text": "When improvements are made, how is their business value measured?",
+      "option_code": "G1",
+      "selected_answer": "Through a defined approach",
+      "what_this_suggests": "The organization is able to connect improvement work to business impact.",
+      "detailed_recommendation": "Keep the approach practical and repeatable. Use it to prioritize future investments and communicate value to sponsors and leaders.",
+      "priority": "Maintain"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q12",
+      "question_text": "When improvements are made, how is their business value measured?",
+      "option_code": "G2",
+      "selected_answer": "In some cases",
+      "what_this_suggests": "Value is measured, but not yet systematically.",
+      "detailed_recommendation": "Identify which types of improvement should always include a value view, such as high-volume issues, major journeys, or investment-heavy changes. This helps make value measurement more consistent.",
+      "priority": "Medium"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q12",
+      "question_text": "When improvements are made, how is their business value measured?",
+      "option_code": "G3",
+      "selected_answer": "Informally",
+      "what_this_suggests": "There is some sense of value, but it is not yet structured.",
+      "detailed_recommendation": "Start with simple value logic rather than a complex business case. Link improvements to a small set of outcomes such as fewer complaints, lower cost-to-serve, better conversion, or better retention.",
+      "priority": "High"
+    },
+    {
+      "axis": "Improve",
+      "question_id": "Q12",
+      "question_text": "When improvements are made, how is their business value measured?",
+      "option_code": "G4",
+      "selected_answer": "It is not measured today",
+      "what_this_suggests": "Improvement work is not yet connected to business value.",
+      "detailed_recommendation": "Begin with a few visible examples. Choose one or two recent improvements and estimate their effect on service cost, revenue, retention, or operational effort to build the habit of value measurement.",
+      "priority": "High"
+    }
+  ],
+  "flow_transitions": [
+    {
+      "previous_question_id": "Q1",
+      "selected_answer": "A1 - It is part of most discussions",
+      "transition": "That’s a strong starting point. Since the customer perspective is already present in most discussions, is there also a shared plan to keep improving the experience?",
+      "selected_option_code": "A1",
+      "selected_option_label": "It is part of most discussions",
+      "next_question_id": "Q2"
+    },
+    {
+      "previous_question_id": "Q1",
+      "selected_answer": "A2 - It is raised in some discussions",
+      "transition": "That helps. So the customer perspective is part of some conversations, but not all of them yet. Is there a clear plan to strengthen it?",
+      "selected_option_code": "A2",
+      "selected_option_label": "It is raised in some discussions",
+      "next_question_id": "Q2"
+    },
+    {
+      "previous_question_id": "Q1",
+      "selected_answer": "A3 - It comes up mainly when there is a problem",
+      "transition": "Thanks, that gives a good picture. If the customer perspective mostly comes up when something goes wrong, is there a plan to work on the experience more proactively?",
+      "selected_option_code": "A3",
+      "selected_option_label": "It comes up mainly when there is a problem",
+      "next_question_id": "Q2"
+    },
+    {
+      "previous_question_id": "Q1",
+      "selected_answer": "A4 - It is rarely part of the conversation",
+      "transition": "I see. If the customer perspective rarely comes up today, is there at least a plan in place to improve the experience?",
+      "selected_option_code": "A4",
+      "selected_option_label": "It is rarely part of the conversation",
+      "next_question_id": "Q2"
+    },
+    {
+      "previous_question_id": "Q2",
+      "selected_answer": "B1 - Yes, and people know it",
+      "transition": "That’s a good foundation. With a plan already in place, who usually takes the lead on these topics?",
+      "selected_option_code": "B1",
+      "selected_option_label": "Yes, and people know it",
+      "next_question_id": "Q3"
+    },
+    {
+      "previous_question_id": "Q2",
+      "selected_answer": "B2 - Yes, but only some teams know it",
+      "transition": "Got it. So the plan exists, but it has not reached everyone yet. Who usually takes the lead on these topics today?",
+      "selected_option_code": "B2",
+      "selected_option_label": "Yes, but only some teams know it",
+      "next_question_id": "Q3"
+    },
+    {
+      "previous_question_id": "Q2",
+      "selected_answer": "B3 - There are ideas, but no clear plan",
+      "transition": "That makes sense. If there are ideas on the table but no shared plan yet, who usually pulls these topics forward?",
+      "selected_option_code": "B3",
+      "selected_option_label": "There are ideas, but no clear plan",
+      "next_question_id": "Q3"
+    },
+    {
+      "previous_question_id": "Q2",
+      "selected_answer": "B4 - No clear plan",
+      "transition": "Thanks, that’s helpful to know. Without a clear plan today, who usually takes the lead on customer experience topics?",
+      "selected_option_code": "B4",
+      "selected_option_label": "No clear plan",
+      "next_question_id": "Q3"
+    },
+    {
+      "previous_question_id": "Q3",
+      "selected_answer": "C1 - One clear person or team",
+      "transition": "That’s useful. With one clear owner in place, how do people across the organization learn what a good customer experience looks like here?",
+      "selected_option_code": "C1",
+      "selected_option_label": "One clear person or team",
+      "next_question_id": "Q4"
+    },
+    {
+      "previous_question_id": "Q3",
+      "selected_answer": "C2 - A few teams share it",
+      "transition": "That helps. Since a few teams share the role, how do people usually learn what good customer experience looks like here?",
+      "selected_option_code": "C2",
+      "selected_option_label": "A few teams share it",
+      "next_question_id": "Q4"
+    },
+    {
+      "previous_question_id": "Q3",
+      "selected_answer": "C3 - It changes depending on the topic",
+      "transition": "Understood. If ownership shifts depending on the topic, how do people usually learn what good customer experience looks like?",
+      "selected_option_code": "C3",
+      "selected_option_label": "It changes depending on the topic",
+      "next_question_id": "Q4"
+    },
+    {
+      "previous_question_id": "Q3",
+      "selected_answer": "C4 - It is not really clear",
+      "transition": "I see. If ownership is not very clear today, how do people learn what good customer experience looks like in practice?",
+      "selected_option_code": "C4",
+      "selected_option_label": "It is not really clear",
+      "next_question_id": "Q4"
+    },
+    {
+      "previous_question_id": "Q5",
+      "selected_answer": "E1 - Continuously or after key interactions",
+      "transition": "That is a strong starting point. You are hearing from customers at the moments that matter most. Once that feedback comes in, what usually happens next?",
+      "selected_option_code": "E1",
+      "selected_option_label": "Continuously or after key interactions",
+      "next_question_id": "Q6"
+    },
+    {
+      "previous_question_id": "Q5",
+      "selected_answer": "E2 - Regularly, on a planned basis",
+      "transition": "That helps. So there is already a regular rhythm in place. Once feedback comes in, what do you usually do with it?",
+      "selected_option_code": "E2",
+      "selected_option_label": "Regularly, on a planned basis",
+      "next_question_id": "Q6"
+    },
+    {
+      "previous_question_id": "Q5",
+      "selected_answer": "E3 - From time to time",
+      "transition": "Got it. So feedback is gathered at certain moments, but not all the time. When it does come in, what usually happens next?",
+      "selected_option_code": "E3",
+      "selected_option_label": "From time to time",
+      "next_question_id": "Q6"
+    },
+    {
+      "previous_question_id": "Q5",
+      "selected_answer": "E4 - Only when an issue comes up",
+      "transition": "That makes sense. So feedback mostly appears when something needs attention. When that happens, what do you usually do next?",
+      "selected_option_code": "E4",
+      "selected_option_label": "Only when an issue comes up",
+      "next_question_id": "Q6"
+    },
+    {
+      "previous_question_id": "Q5",
+      "selected_answer": "E5 - We do not collect it",
+      "transition": "Thanks, that is helpful to know. If customer input comes in through complaints, teams, or day-to-day interactions, what usually happens with it?",
+      "selected_option_code": "E5",
+      "selected_option_label": "We do not collect it",
+      "next_question_id": "Q6"
+    },
+    {
+      "previous_question_id": "Q6",
+      "selected_answer": "F1 - It is reviewed, analyzed, and turned into actions",
+      "transition": "That is a solid base. It means feedback is already feeding decisions. When you look across the experience, what journeys or moments do you actually track today?",
+      "selected_option_code": "F1",
+      "selected_option_label": "It is reviewed, analyzed, and turned into actions",
+      "next_question_id": "Q7"
+    },
+    {
+      "previous_question_id": "Q6",
+      "selected_answer": "F2 - It is reviewed and summarized",
+      "transition": "That is a useful start. So there is already some structure in how feedback is handled. What journeys or moments do you tend to track today?",
+      "selected_option_code": "F2",
+      "selected_option_label": "It is reviewed and summarized",
+      "next_question_id": "Q7"
+    },
+    {
+      "previous_question_id": "Q6",
+      "selected_answer": "F3 - It is looked at case by case",
+      "transition": "I see. So the picture is built one issue at a time today. What journeys or moments do you usually keep an eye on?",
+      "selected_option_code": "F3",
+      "selected_option_label": "It is looked at case by case",
+      "next_question_id": "Q7"
+    },
+    {
+      "previous_question_id": "Q6",
+      "selected_answer": "F4 - It is stored, but not really used",
+      "transition": "Understood. So the challenge is not only hearing customers, but making use of what is heard. What journeys or moments do you track today, if any?",
+      "selected_option_code": "F4",
+      "selected_option_label": "It is stored, but not really used",
+      "next_question_id": "Q7"
+    },
+    {
+      "previous_question_id": "Q7",
+      "selected_answer": "G1 - End-to-end journeys across several touchpoints",
+      "transition": "That gives you quite a complete view. How often do you go back and refresh that journey view?",
+      "selected_option_code": "G1",
+      "selected_option_label": "End-to-end journeys across several touchpoints",
+      "next_question_id": "Q8"
+    },
+    {
+      "previous_question_id": "Q7",
+      "selected_answer": "G2 - A few important journeys",
+      "transition": "That makes sense. Focusing on the key journeys first is often a practical way to start. How often do you revisit that view?",
+      "selected_option_code": "G2",
+      "selected_option_label": "A few important journeys",
+      "next_question_id": "Q8"
+    },
+    {
+      "previous_question_id": "Q7",
+      "selected_answer": "G3 - Individual touchpoints only",
+      "transition": "Got it. So the view is still centered on specific touchpoints more than the full journey. How often is that view updated?",
+      "selected_option_code": "G3",
+      "selected_option_label": "Individual touchpoints only",
+      "next_question_id": "Q8"
+    },
+    {
+      "previous_question_id": "Q7",
+      "selected_answer": "G4 - Mostly service or complaint moments",
+      "transition": "Understood. So you mostly see the experience through the moments where things go wrong. How often do you step back and update that view?",
+      "selected_option_code": "G4",
+      "selected_option_label": "Mostly service or complaint moments",
+      "next_question_id": "Q8"
+    },
+    {
+      "previous_question_id": "Q7",
+      "selected_answer": "G5 - We do not really track journeys today",
+      "transition": "Thanks, that gives a clear picture. If there is any journey view today, how often does it actually get reviewed or updated?",
+      "selected_option_code": "G5",
+      "selected_option_label": "We do not really track journeys today",
+      "next_question_id": "Q8"
+    },
+    {
+      "previous_question_id": "Q8",
+      "selected_answer": "H1 - Regularly",
+      "transition": "That is a positive sign. It suggests the journey view stays alive over time. When you decide where to focus, how do you decide which journeys or moments matter most?",
+      "selected_option_code": "H1",
+      "selected_option_label": "Regularly",
+      "next_question_id": "Q9"
+    },
+    {
+      "previous_question_id": "Q8",
+      "selected_answer": "H2 - Sometimes",
+      "transition": "That helps. So the journey view gets refreshed from time to time. When you decide where to focus, how do you usually make that choice?",
+      "selected_option_code": "H2",
+      "selected_option_label": "Sometimes",
+      "next_question_id": "Q9"
+    },
+    {
+      "previous_question_id": "Q8",
+      "selected_answer": "H3 - Rarely",
+      "transition": "Got it. So updates happen, but not very often. In that context, how do you decide which journeys or moments deserve attention first?",
+      "selected_option_code": "H3",
+      "selected_option_label": "Rarely",
+      "next_question_id": "Q9"
+    },
+    {
+      "previous_question_id": "Q8",
+      "selected_answer": "H4 - It is not updated in a structured way",
+      "transition": "I see. So keeping focus on the right moments becomes even more important. How do you usually decide what matters most?",
+      "selected_option_code": "H4",
+      "selected_option_label": "It is not updated in a structured way",
+      "next_question_id": "Q9"
+    },
+    {
+      "previous_question_id": "Q10",
+      "selected_answer": "E1 - It turns into action quickly",
+      "transition": "That’s a positive sign. When action happens quickly, how do you usually tell whether the change really made a difference?",
+      "selected_option_code": "E1",
+      "selected_option_label": "It turns into action quickly",
+      "next_question_id": "Q11"
+    },
+    {
+      "previous_question_id": "Q10",
+      "selected_answer": "E2 - It usually gets picked up",
+      "transition": "That helps. So issues are usually picked up. Once something is changed, how do you normally tell whether it really helped?",
+      "selected_option_code": "E2",
+      "selected_option_label": "It usually gets picked up",
+      "next_question_id": "Q11"
+    },
+    {
+      "previous_question_id": "Q10",
+      "selected_answer": "E3 - It may be discussed first",
+      "transition": "Understood. So there is often a discussion before things move. When a change does happen, how do you usually know whether it helped?",
+      "selected_option_code": "E3",
+      "selected_option_label": "It may be discussed first",
+      "next_question_id": "Q11"
+    },
+    {
+      "previous_question_id": "Q10",
+      "selected_answer": "E4 - It often stays unresolved",
+      "transition": "Thanks for being open about that. When improvements do happen, how do you usually tell whether they made things better?",
+      "selected_option_code": "E4",
+      "selected_option_label": "It often stays unresolved",
+      "next_question_id": "Q11"
+    },
+    {
+      "previous_question_id": "Q11",
+      "selected_answer": "F1 - We check results clearly",
+      "transition": "That’s a strong habit. And when improvements are made, how is their business value usually measured?",
+      "selected_option_code": "F1",
+      "selected_option_label": "We check results clearly",
+      "next_question_id": "Q12"
+    },
+    {
+      "previous_question_id": "Q11",
+      "selected_answer": "F2 - We usually review the biggest changes",
+      "transition": "That makes sense. So the bigger changes get reviewed. When improvements are made, how is their business value usually measured?",
+      "selected_option_code": "F2",
+      "selected_option_label": "We usually review the biggest changes",
+      "next_question_id": "Q12"
+    },
+    {
+      "previous_question_id": "Q11",
+      "selected_answer": "F3 - We get a general sense of whether it worked",
+      "transition": "Got it. So there is usually a feel for what worked, even if it is not always formal. When improvements are made, how is their business value measured?",
+      "selected_option_code": "F3",
+      "selected_option_label": "We get a general sense of whether it worked",
+      "next_question_id": "Q12"
+    },
+    {
+      "previous_question_id": "Q11",
+      "selected_answer": "F4 - We rarely go back and check",
+      "transition": "I see. So follow-up is still limited today. When improvements are made, how is their business value measured?",
+      "selected_option_code": "F4",
+      "selected_option_label": "We rarely go back and check",
+      "next_question_id": "Q12"
+    }
+  ]
+}
