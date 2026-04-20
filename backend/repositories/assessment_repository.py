@@ -16,7 +16,6 @@ def create_assessment(
     respondent_name: str | None,
     respondent_email: str | None,
     respondent_role_title: str | None,
-    sector: str | None = None,
 ) -> int:
     query = """
         INSERT INTO assessments (
@@ -24,17 +23,15 @@ def create_assessment(
             respondent_name,
             respondent_email,
             respondent_role_title,
-            sector,
             status
         )
-        VALUES (%s, %s, %s, %s, %s, 'in_progress')
+        VALUES (%s, %s, %s, %s, 'in_progress')
     """
 
     normalized_company_name = _normalize_profile_value(company_name) or DEFAULT_COMPANY_NAME
     normalized_respondent_name = _normalize_profile_value(respondent_name)
     normalized_respondent_email = _normalize_profile_value(respondent_email)
     normalized_respondent_role_title = _normalize_profile_value(respondent_role_title)
-    normalized_sector = _normalize_profile_value(sector)
 
     with get_db_cursor(dictionary=False) as (_, cursor):
         cursor.execute(
@@ -44,7 +41,6 @@ def create_assessment(
                 normalized_respondent_name,
                 normalized_respondent_email,
                 normalized_respondent_role_title,
-                normalized_sector,
             ),
         )
         return int(cursor.lastrowid)
@@ -56,15 +52,13 @@ def update_assessment_profile(
     respondent_name: str | None,
     respondent_email: str | None,
     respondent_role_title: str | None,
-    sector: str | None,
 ) -> None:
     query = """
         UPDATE assessments
         SET company_name = %s,
             respondent_name = %s,
             respondent_email = %s,
-            respondent_role_title = %s,
-            sector = %s
+            respondent_role_title = %s
         WHERE id = %s
     """
 
@@ -72,7 +66,6 @@ def update_assessment_profile(
     normalized_respondent_name = _normalize_profile_value(respondent_name)
     normalized_respondent_email = _normalize_profile_value(respondent_email)
     normalized_respondent_role_title = _normalize_profile_value(respondent_role_title)
-    normalized_sector = _normalize_profile_value(sector)
 
     with get_db_cursor(dictionary=False) as (_, cursor):
         cursor.execute(
@@ -82,7 +75,6 @@ def update_assessment_profile(
                 normalized_respondent_name,
                 normalized_respondent_email,
                 normalized_respondent_role_title,
-                normalized_sector,
                 assessment_id,
             ),
         )
@@ -96,7 +88,6 @@ def get_assessment_by_id(assessment_id: int) -> dict[str, Any] | None:
             respondent_name,
             respondent_email,
             respondent_role_title,
-            sector,
             status,
             overall_score,
             maturity_level,

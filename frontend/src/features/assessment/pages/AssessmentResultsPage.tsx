@@ -246,7 +246,9 @@ export default function AssessmentResultsPage() {
 
   const axisSections = useMemo(() => {
     if (!results) return [];
-    return results.axes.map(buildAxisSection);
+    return results.axes
+      .filter((axis) => axis.axis_id !== 4) // Exclude Profile axis
+      .map(buildAxisSection);
   }, [results]);
 
   const strengthCount = useMemo(

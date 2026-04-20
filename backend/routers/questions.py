@@ -20,11 +20,12 @@ def get_questions_route(axis_id: int | None = None):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/{question_id}", response_model=QuestionOut)
-def get_question_route(question_id: int):
+def get_question_route(question_id: int, assessment_id: int | None = None):
     try:
         question = get_question_by_id(question_id)
         if not question:
             raise HTTPException(status_code=404, detail="Question not found")
+
         return question
     except HTTPException:
         raise

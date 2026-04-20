@@ -32,8 +32,17 @@ export function AssessmentChatMessage({ message }: AssessmentChatMessageProps) {
       >
         {isQuestion ? (
           <>
+            {message.prefaceText ? (
+              <p className="text-sm leading-7 whitespace-pre-wrap text-[#4B5563]">
+                {message.prefaceText}
+              </p>
+            ) : null}
             {message.questionCode ? (
-              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#C5A04F]">
+              <p
+                className={`text-[11px] font-semibold uppercase tracking-[0.18em] text-[#C5A04F] ${
+                  message.prefaceText ? "mt-3" : ""
+                }`}
+              >
                 {message.questionCode}
               </p>
             ) : null}

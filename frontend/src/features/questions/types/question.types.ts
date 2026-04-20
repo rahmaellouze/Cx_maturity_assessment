@@ -46,6 +46,7 @@ export type Question = {
   weight: number | null;
   display_order?: number;
   is_active: boolean;
+  llm_conversational_text?: string | null;
   options: AnswerOption[];
   display_rules: DisplayRule[];
 };

@@ -1,6 +1,7 @@
 from typing import Any
 from db import get_db_cursor
 from schemas.question import QuestionCreate, QuestionUpdate
+from services.mistral_service import generate_transition_text
 
 
 def _normalize_question_row(row: dict[str, Any]) -> dict[str, Any]:
@@ -208,13 +209,57 @@ def _attach_children(questions: list[dict[str, Any]]) -> list[dict[str, Any]]:
         options = [_normalize_option_row(row) for row in cursor.fetchall()]
         cursor.execute(rules_query, tuple(question_ids))
         rules = [_normalize_rule_row(row) for row in cursor.fetchall()]
+    
     options_by_question: dict[int, list[dict[str, Any]]] = {}
     for option in options:
         options_by_question.setdefault(option["question_id"], []).append(option)
+    
     rules_by_question: dict[int, list[dict[str, Any]]] = {}
     for rule in rules:
         rules_by_question.setdefault(rule["question_id"], []).append(rule)
+    
     for question in questions:
         question["options"] = options_by_question.get(question["id"], [])
         question["display_rules"] = rules_by_question.get(question["id"], [])
+    
     return questions
+
+
+def generate_and_cache_transition(from_question: dict[str, Any], to_question: dict[str, Any],
+                                user_answer: str, assessment_id: int | None = None, context: dict[str, Any] = None) -> str | None:
+    """Generate and cache contextual transition between questions."""
+    from_id = from_question.get("id")
+    to_id = to_question.get("id")
+    if not from_id or not to_id:
+        return None
+
+    # Check if already in cache (using hash of answer for uniqueness)
+    answer_hash = hash(user_answer) % 1000000  # Simple hash for indexing
+    with get_db_cursor(dictionary=True) as (_, cursor):
+        cursor.execute(
+            "SELECT transition_text FROM question_transition_cache WHERE from_question_id = %s AND to_question_id = %s AND assessment_id <=> %s AND user_answer = %s LIMIT 1",
+            (from_id, to_id, assessment_id, user_answer)
+        )
+        cached = cursor.fetchone()
+        if cached and cached.get("transition_text"):
+            return cached["transition_text"]
+
+    # Generate new transition
+    try:
+        transition = generate_transition_text(from_question, to_question, user_answer, context)
+        if not transition:
+            return None
+
+        # Store in cache
+        with get_db_cursor(dictionary=False) as (_, cursor):
+            cursor.execute(
+                """INSERT INTO question_transition_cache (from_question_id, to_question_id, assessment_id, user_answer, transition_text, generated_at)
+                   VALUES (%s, %s, %s, %s, %s, NOW())
+                   ON DUPLICATE KEY UPDATE transition_text = %s, generated_at = NOW()""",
+                (from_id, to_id, assessment_id, user_answer, transition, transition)
+            )
+        return transition
+    except Exception as e:
+        print(f"Error generating transition from question {from_id} to {to_id}: {e}")
+        return None
+

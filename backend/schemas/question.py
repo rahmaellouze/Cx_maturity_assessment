@@ -54,6 +54,7 @@ class QuestionUpdate(QuestionBase):
 
 class QuestionOut(QuestionBase):
     id: int
+    llm_conversational_text: Optional[str] = None
     options: list[AnswerOptionOut] = Field(default_factory=list)
     display_rules: list[DisplayRuleOut] = Field(default_factory=list)
 

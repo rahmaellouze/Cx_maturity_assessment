@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getAssessment, submitAssessment } from "@/features/assessment/api/assessmentApi";
+import { generateTransition } from "@/features/assessment/api/mistralApi";
 import { getQuestions } from "@/features/questions/api/questionsApi";
 import { AssessmentChatComposer } from "@/features/assessment/components/AssessmentChatComposer";
 import { AssessmentChatMessage } from "@/features/assessment/components/AssessmentChatMessage";
@@ -31,123 +32,6 @@ const QUESTION_CONTEXT_BY_CODE: Record<string, string> = {
   Q10: "Pain points are part of every experience; what matters most is how they are handled. Let’s look at what usually happens here.",
   Q11: "Real improvement is not just about making changes, but knowing whether they worked.",
 };
-const PROFILING_QUESTIONS = [
-  {
-    id: 10001,
-    question_code: "PROFILE_COMPANY",
-    question_text: "Before we finish, what is your company name?",
-    answer_type: "text_area",
-    helper_text: "Enter your organization name",
-    is_profiling: true,
-  },
-  {
-    id: 10002,
-    question_code: "PROFILE_NAME",
-    question_text: "What is your full name?",
-    answer_type: "text_area",
-    helper_text: "Enter your full name",
-    is_profiling: true,
-  },
-  {
-    id: 10003,
-    question_code: "PROFILE_EMAIL",
-    question_text: "What is your work email?",
-    answer_type: "text_area",
-    helper_text: "Enter your work email",
-    is_profiling: true,
-  },
-  {
-    id: 10004,
-    question_code: "PROFILE_ROLE",
-    question_text: "What is your role or title?",
-    answer_type: "text_area",
-    helper_text: "Enter your role or title",
-    is_profiling: true,
-  },
-  {
-    id: 10005,
-    question_code: "PROFILE_SECTOR",
-    question_text: "Which sector does your organization operate in?",
-    answer_type: "single_select",
-    helper_text: "Choose the sector that best fits your organization",
-    is_profiling: true,
-    options: [
-      {
-        id: 100051,
-        option_label: "Financial Services",
-        option_value: "financial_services",
-        option_code: "FIN_SERV",
-        display_order: 1,
-        is_active: true,
-      },
-      {
-        id: 100052,
-        option_label: "Government & Public Sector",
-        option_value: "government_public",
-        option_code: "GPS",
-        display_order: 2,
-        is_active: true,
-      },
-      {
-        id: 100053,
-        option_label: "Health & Life Sciences",
-        option_value: "health_life_sciences",
-        option_code: "HLS",
-        display_order: 3,
-        is_active: true,
-      },
-      {
-        id: 100054,
-        option_label: "Consumer",
-        option_value: "consumer",
-        option_code: "CONSUMER",
-        display_order: 4,
-        is_active: true,
-      },
-      {
-        id: 100055,
-        option_label: "Technology, Media & Telecommunications",
-        option_value: "tmt",
-        option_code: "TMT",
-        display_order: 5,
-        is_active: true,
-      },
-      {
-        id: 100056,
-        option_label: "Energy & Resources",
-        option_value: "energy_resources",
-        option_code: "E&R",
-        display_order: 6,
-        is_active: true,
-      },
-      {
-        id: 100057,
-        option_label: "Industrial Products",
-        option_value: "industrial_products",
-        option_code: "IP",
-        display_order: 7,
-        is_active: true,
-      },
-      {
-        id: 100058,
-        option_label: "Real Estate, Hospitality & Construction",
-        option_value: "real_estate_hospitality_construction",
-        option_code: "REHC",
-        display_order: 8,
-        is_active: true,
-      },
-      {
-        id: 100059,
-        option_label: "Other",
-        option_value: "other",
-        option_code: "OTHER",
-        display_order: 9,
-        is_active: true,
-      },
-    ],
-  },
-] as const;
-
 function sortQuestions(input: Question[]) {
   return [...input].sort((a, b) => {
     const aAxisId = a.axis_id ?? 0;
@@ -242,14 +126,6 @@ function getQuestionContext(question: Question | null | undefined) {
   return QUESTION_CONTEXT_BY_CODE[key] ?? null;
 }
 
-function transitionIntroducesQuestion(
-  previousAnswer: AssessmentStoredAnswer | null,
-  questionId: number,
-) {
-  if (!previousAnswer?.transitionText) return false;
-  return previousAnswer.nextQuestionId === questionId;
-}
-
 function buildMessageHistory({
   includeWelcome,
   assessment,
@@ -258,9 +134,7 @@ function buildMessageHistory({
   currentQuestionId,
   questionsById,
   finished,
-  pendingTransition,
-  pendingContext,
-  revealedContextQuestionIds,
+  assistantQuestionTexts,
 }: {
   includeWelcome: boolean;
   assessment: Assessment | null;
@@ -269,9 +143,7 @@ function buildMessageHistory({
   currentQuestionId: number | null;
   questionsById: Record<number, Question>;
   finished: boolean;
-  pendingTransition: AssessmentPendingTransition | null;
-  pendingContext: AssessmentPendingContext | null;
-  revealedContextQuestionIds: number[];
+  assistantQuestionTexts: Record<number, string>;
 }): AssessmentChatMessageType[] {
   const messages: AssessmentChatMessageType[] = includeWelcome
     ? [
@@ -298,44 +170,24 @@ function buildMessageHistory({
     const previousAnswer = previousQuestionId
       ? answers[previousQuestionId]
       : null;
-    const questionAlreadyAskedInTransition = transitionIntroducesQuestion(
-      previousAnswer ?? null,
-      question.id,
-    );
-    const questionContext = getQuestionContext(question);
     const answer = answers[question.id];
     const shouldShowQuestionBubble =
       currentQuestionId === question.id || Boolean(answer);
 
-    if (previousAnswer?.transitionText) {
-      messages.push({
-        id: createMessageId("transition", previousQuestionId),
-        type: "assistant_text",
-        text: previousAnswer.transitionText,
-        createdAt: messages.length + 1,
-        questionId: previousQuestionId,
-      });
-    }
-
-    if (questionContext && revealedContextQuestionIds.includes(question.id)) {
-      messages.push({
-        id: createMessageId("context", question.id),
-        type: "assistant_text",
-        text: questionContext,
-        createdAt: messages.length + 1,
-        questionId: question.id,
-      });
-    }
-
-    if (!questionAlreadyAskedInTransition && shouldShowQuestionBubble) {
+    if (shouldShowQuestionBubble) {
       messages.push({
         id: createMessageId("question", question.id),
         type: "assistant_question",
-        text: question.question_text,
+        text:
+          assistantQuestionTexts[question.id] ?? question.question_text,
         createdAt: messages.length + 1,
         questionId: question.id,
         questionCode: question.question_code ?? `Q${question.id}`,
         helperText: question.helper_text,
+        prefaceText:
+          previousAnswer?.nextQuestionId === question.id
+            ? previousAnswer.transitionText
+            : null,
       });
     }
 
@@ -349,27 +201,6 @@ function buildMessageHistory({
       });
     }
   });
-
-  if (pendingTransition?.transitionText) {
-    messages.push({
-      id: createMessageId("pending", pendingTransition.questionId),
-      type: "assistant_text",
-      text: pendingTransition.transitionText,
-      createdAt: messages.length + 1,
-      questionId: pendingTransition.questionId,
-    });
-  }
-
-  if (pendingContext?.contextText) {
-    messages.push({
-      id: createMessageId("pending-context", pendingContext.questionId),
-      type: "assistant_text",
-      text: pendingContext.contextText,
-      createdAt: messages.length + 1,
-      questionId: pendingContext.questionId,
-    });
-  }
-
   if (finished) {
     messages.push({
       id: createMessageId("complete", "done"),
@@ -396,6 +227,9 @@ export default function AssessmentFormPage() {
   const [messageHistory, setMessageHistory] = useState<AssessmentChatMessageType[]>(
     [],
   );
+  const [assistantQuestionTexts, setAssistantQuestionTexts] = useState<
+    Record<number, string>
+  >({});
   const [progress, setProgress] = useState<AssessmentChatProgressType>({
     current: 0,
     total: 0,
@@ -421,10 +255,7 @@ export default function AssessmentFormPage() {
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const timeoutsRef = useRef<number[]>([]);
 
-  const sortedQuestions = useMemo(() => {
-  const baseQuestions = sortQuestions(questions);
-  return [...baseQuestions, ...PROFILING_QUESTIONS];
-}, [questions]);
+  const sortedQuestions = useMemo(() => sortQuestions(questions), [questions]);
   const questionsById = useMemo(
     () =>
       Object.fromEntries(
@@ -504,16 +335,47 @@ export default function AssessmentFormPage() {
         currentQuestionId: nextCurrentQuestionId,
         questionsById: questionsSourceById,
         finished: nextFinished,
-        pendingTransition: nextPendingTransition,
-        pendingContext: nextPendingContext ?? pendingContext,
-        revealedContextQuestionIds:
-          nextRevealedContextQuestionIds ?? revealedContextQuestionIds,
+        assistantQuestionTexts,
       }),
     );
 
     setProgress(
       getQuestionProgress(nextCurrentQuestionId, questionsSource, nextFinished),
     );
+  };
+
+  const fetchAssistantQuestionText = async (question: Question) => {
+    if (assistantQuestionTexts[question.id]) return;
+    try {
+      setIsTyping(true);
+      setShowTypingIndicator(true);
+
+      // Use LLM formulation from question object if available
+      const llmText = question.llm_conversational_text;
+      if (llmText) {
+        setAssistantQuestionTexts((prev) => ({
+          ...prev,
+          [question.id]: llmText,
+        }));
+      }
+
+      syncConversation({
+        nextPath: path,
+        nextAnswers: answers,
+        nextCurrentQuestionId: currentQuestionId,
+        nextPendingTransition: pendingTransition,
+        nextFinished: finished,
+        nextHasShownWelcome: hasShownWelcome,
+        assessmentOverride: assessment,
+        questionsOverride: sortedQuestions,
+        nextPendingContext: pendingContext,
+        nextRevealedContextQuestionIds: revealedContextQuestionIds,
+      });
+    } catch (err) {
+      console.error("LLM question formulation failed:", err);
+    } finally {
+      stopTypingIndicator();
+    }
   };
 
   const runAssistantMessageStep = async (
@@ -751,20 +613,39 @@ export default function AssessmentFormPage() {
     return nextQuestion?.id ?? null;
   };
 
-  const resolveNextStep = (question: Question, selectedOptionIds: number[]) => {
-    const matchedRule = question.display_rules
-      ?.filter((rule) => rule.is_active)
-      .sort((a, b) => (a.display_order ?? 0) - (b.display_order ?? 0))
-      .find(
-        (rule) =>
-          rule.expected_option_id != null &&
-          selectedOptionIds.includes(rule.expected_option_id),
-      );
+  const resolveNextStep = async (question: Question, selectedOptionIds: number[], userAnswerText: string) => {
+    const nextQuestionId = nextSequentialQuestionId(question.id);
 
-    return {
-      nextQuestionId: matchedRule?.next_question_id ?? nextSequentialQuestionId(question.id),
-      transitionText: matchedRule?.transition_text ?? null,
-    };
+    if (!nextQuestionId) {
+      return {
+        nextQuestionId: null,
+        transitionText: null,
+      };
+    }
+
+    try {
+      // Generate LLM transition
+      const transitionResponse = await generateTransition({
+        from_question_id: question.id,
+        to_question_id: nextQuestionId,
+        user_answer: userAnswerText,
+        assessment_id: assessment?.id ?? null,
+        company_name: assessment?.company_name ?? null,
+        assessment_progress: `${path.length}/${sortedQuestions.length} questions completed`,
+      });
+
+      return {
+        nextQuestionId,
+        transitionText: transitionResponse.transition_text,
+      };
+    } catch (err) {
+      console.error("Failed to generate transition:", err);
+      // Fallback to no transition if LLM fails
+      return {
+        nextQuestionId,
+        transitionText: null,
+      };
+    }
   };
 
   const moveToQuestion = (
@@ -796,7 +677,6 @@ export default function AssessmentFormPage() {
       : path;
     const nextQuestion = nextQuestionId ? questionsById[nextQuestionId] : null;
     const nextQuestionContext = getQuestionContext(nextQuestion);
-
     const nextRevealedContextQuestionIds =
       nextQuestionId && nextQuestionContext
         ? [
@@ -839,66 +719,18 @@ export default function AssessmentFormPage() {
       });
     };
 
-    const revealContextStage = () => {
-      setPendingTransition(null);
-      setCurrentQuestionId(null);
-
-      const nextPendingContext = nextQuestionContext
-        ? {
-            questionId: nextQuestionId ?? 0,
-            contextText: nextQuestionContext,
-          }
-        : null;
-
-      setPendingContext(nextPendingContext);
-
-      syncConversation({
-        nextPath: path,
-        nextAnswers,
-        nextCurrentQuestionId: null,
-        nextPendingTransition: null,
-        nextFinished: false,
-        nextHasShownWelcome: hasShownWelcome,
-        nextPendingContext,
-        nextRevealedContextQuestionIds: revealedContextQuestionIds,
-      });
-    };
-
     const runNextSequence = async () => {
-      if (transitionText) {
-        await runAssistantMessageStep(() => {
-          const interimPendingTransition = {
-            questionId: sourceQuestionId,
-            nextQuestionId,
-            transitionText,
-          };
-          setPendingTransition(interimPendingTransition);
-          syncConversation({
-            nextPath: path,
-            nextAnswers,
-            nextCurrentQuestionId: null,
-            nextPendingTransition: interimPendingTransition,
-            nextFinished: false,
-            nextHasShownWelcome: hasShownWelcome,
-            nextPendingContext: null,
-            nextRevealedContextQuestionIds: revealedContextQuestionIds,
-          });
-        });
+      if (nextQuestionId !== null) {
+        await runAssistantMessageStep(() => undefined);
       }
 
-      if (nextQuestionContext) {
-        await runAssistantMessageStep(revealContextStage, BOT_TYPING_DELAY_MS);
-      }
-
-      setPendingTransition(null);
-      setPendingContext(null);
       revealQuestion();
     };
 
     void runNextSequence();
   };
 
-  const submitResponse = ({
+  const submitResponse = async ({
     question,
     optionIds,
     optionLabels,
@@ -911,7 +743,8 @@ export default function AssessmentFormPage() {
     optionCodes?: string[];
     answerText: string | null;
   }) => {
-    const { nextQuestionId, transitionText } = resolveNextStep(question, optionIds);
+    const userAnswerText = answerText || optionLabels.join(", ") || "No answer provided";
+    const { nextQuestionId, transitionText } = await resolveNextStep(question, optionIds, userAnswerText);
 
     const nextAnswer: AssessmentStoredAnswer = {
       questionId: question.id,
@@ -933,7 +766,7 @@ export default function AssessmentFormPage() {
     moveToQuestion(nextQuestionId, nextAnswers, transitionText, question.id);
   };
 
-  const handleSingleSelect = (option: AnswerOption) => {
+  const handleSingleSelect = async (option: AnswerOption) => {
     if (
       !currentQuestion ||
       option.id == null ||
@@ -944,9 +777,9 @@ export default function AssessmentFormPage() {
 
     setSelectedAnswer(option.id);
     requestAnimationFrame(() => {
-  bottomRef.current?.scrollIntoView({ block: "end", behavior: "auto" });
-});
-    submitResponse({
+      bottomRef.current?.scrollIntoView({ block: "end", behavior: "auto" });
+    });
+    await submitResponse({
       question: currentQuestion,
       optionIds: [option.id],
       optionLabels: [option.option_label],
@@ -976,7 +809,7 @@ export default function AssessmentFormPage() {
   };
 
 
-  const submitMultiSelectAnswer = () => {
+  const submitMultiSelectAnswer = async () => {
     if (!currentQuestion || currentQuestion.answer_type !== "multi_select") return;
 
     const selectedOptionIds = Array.isArray(selectedAnswer) ? selectedAnswer : [];
@@ -986,7 +819,7 @@ export default function AssessmentFormPage() {
       (option) => option.id != null && selectedOptionIds.includes(option.id),
     );
 
-    submitResponse({
+    await submitResponse({
       question: currentQuestion,
       optionIds: selectedOptionIds,
       optionLabels: selectedOptions.map((option) => option.option_label),
@@ -1049,7 +882,7 @@ export default function AssessmentFormPage() {
     beginConversation(sortedQuestions, assessment, true);
   };
 
-  const handleComposerSend = () => {
+  const handleComposerSend = async () => {
     if (isTyping) return;
 
     const rawValue = composerValue.trim();
@@ -1074,7 +907,7 @@ export default function AssessmentFormPage() {
       if (currentQuestion.answer_type === "text_area") {
         if (currentQuestion.is_mandatory) return;
 
-        submitResponse({
+        await submitResponse({
           question: currentQuestion,
           optionIds: [],
           optionLabels: [],
@@ -1085,12 +918,12 @@ export default function AssessmentFormPage() {
       }
 
       if (currentQuestion.answer_type === "multi_select") {
-        submitMultiSelectAnswer();
+        await submitMultiSelectAnswer();
       }
       return;
     }
 
-    submitResponse({
+    await submitResponse({
       question: currentQuestion,
       optionIds: [],
       optionLabels: [],
@@ -1126,6 +959,11 @@ export default function AssessmentFormPage() {
     if (!currentQuestionId) return;
     setQuestionSelectionState(currentQuestionId);
   }, [currentQuestionId]);
+
+  useEffect(() => {
+    if (!currentQuestion || assistantQuestionTexts[currentQuestion.id]) return;
+    void fetchAssistantQuestionText(currentQuestion);
+  }, [currentQuestion?.id, currentQuestion?.question_text]);
 
   useEffect(() => {
     if (currentQuestionId != null) {

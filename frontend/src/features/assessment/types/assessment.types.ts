@@ -47,6 +47,7 @@ export type AssessmentChatMessage = {
   questionId?: number;
   questionCode?: string | null;
   helperText?: string | null;
+  prefaceText?: string | null;
 };
 
 export type AssessmentChatProgress = {
