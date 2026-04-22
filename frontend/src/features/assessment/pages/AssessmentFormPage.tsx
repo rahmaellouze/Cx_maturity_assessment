@@ -6,6 +6,7 @@ import { getQuestions } from "@/features/questions/api/questionsApi";
 import { AssessmentChatComposer } from "@/features/assessment/components/AssessmentChatComposer";
 import { AssessmentChatMessage } from "@/features/assessment/components/AssessmentChatMessage";
 import { AssessmentChatProgress } from "@/features/assessment/components/AssessmentChatProgress";
+import { motion, AnimatePresence } from "framer-motion";
 import { AssessmentQuickReplies } from "@/features/assessment/components/AssessmentQuickReplies";
 import type {
   Assessment,
@@ -144,7 +145,7 @@ function buildMessageHistory({
   questionsById: Record<number, Question>;
   finished: boolean;
   assistantQuestionTexts: Record<number, string>;
-}): AssessmentChatMessageType[] {
+}): AssessmentChatMessageType[]   {
   const messages: AssessmentChatMessageType[] = includeWelcome
     ? [
         {
@@ -175,19 +176,23 @@ function buildMessageHistory({
       currentQuestionId === question.id || Boolean(answer);
 
     if (shouldShowQuestionBubble) {
+      const transitionText =
+        previousAnswer?.nextQuestionId === question.id
+          ? previousAnswer.transitionText
+          : null;
+      const combinedText =
+        transitionText
+          ? `${transitionText}\n\n${assistantQuestionTexts[question.id] ?? question.question_text}`
+          : assistantQuestionTexts[question.id] ?? question.question_text;
+
       messages.push({
         id: createMessageId("question", question.id),
         type: "assistant_question",
-        text:
-          assistantQuestionTexts[question.id] ?? question.question_text,
+        text: combinedText,
         createdAt: messages.length + 1,
         questionId: question.id,
         questionCode: question.question_code ?? `Q${question.id}`,
         helperText: question.helper_text,
-        prefaceText:
-          previousAnswer?.nextQuestionId === question.id
-            ? previousAnswer.transitionText
-            : null,
       });
     }
 
@@ -212,6 +217,19 @@ function buildMessageHistory({
 
   return messages;
 }
+
+const TypingIndicator = () => (
+  <div className="flex justify-start">
+    <div className="inline-flex items-center gap-3 rounded-[1.5rem] border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#4B5563] shadow-[0_14px_34px_rgba(17,24,39,0.06)]">
+      <div className="flex items-center gap-1.5">
+        <span className="h-2 w-2 animate-bounce rounded-full bg-[#C5A04F] [animation-delay:-0.2s]" />
+        <span className="h-2 w-2 animate-bounce rounded-full bg-[#C5A04F] [animation-delay:-0.1s]" />
+        <span className="h-2 w-2 animate-bounce rounded-full bg-[#C5A04F]" />
+      </div>
+      <span className="font-medium">Assistant is typing...</span>
+    </div>
+  </div>
+);
 
 export default function AssessmentFormPage() {
   const { assessmentId } = useParams();
@@ -804,10 +822,9 @@ export default function AssessmentFormPage() {
 
     setSelectedAnswer(nextSelection);
     requestAnimationFrame(() => {
-  bottomRef.current?.scrollIntoView({ block: "end", behavior: "auto" });
-});
+      bottomRef.current?.scrollIntoView({ block: "end", behavior: "auto" });
+    });
   };
-
 
   const submitMultiSelectAnswer = async () => {
     if (!currentQuestion || currentQuestion.answer_type !== "multi_select") return;
@@ -878,9 +895,13 @@ export default function AssessmentFormPage() {
   };
 
   const handleRestart = () => {
-    if (sortedQuestions.length === 0) return;
-    beginConversation(sortedQuestions, assessment, true);
-  };
+  if (isTyping) return;
+
+  const confirm = window.confirm("Restart the assessment? Your progress will be lost.");
+  if (!confirm) return;
+
+  beginConversation(sortedQuestions, assessment, true);
+};
 
   const handleComposerSend = async () => {
     if (isTyping) return;
@@ -947,7 +968,7 @@ export default function AssessmentFormPage() {
     try {
       setSubmitting(true);
       await submitAssessment(Number(assessmentId), { answers: payload });
-      navigate(`/assessment/${assessmentId}/results`);
+      navigate(`/assessment/${assessmentId}/generating?next=results`);
     } catch (err) {
       alert(err instanceof Error ? err.message : "Failed to submit assessment");
     } finally {
@@ -971,19 +992,18 @@ export default function AssessmentFormPage() {
     }
   }, [currentQuestionId]);
 
-  useLayoutEffect(() => {
+useLayoutEffect(() => {
   const el = scrollRef.current;
   const bottom = bottomRef.current;
   if (!el || !bottom) return;
 
   requestAnimationFrame(() => {
     bottom.scrollIntoView({
+      behavior: "smooth",
       block: "end",
-      behavior: "auto",
     });
   });
-}, [messageHistory, currentQuestionId, isTyping, showTypingIndicator, selectedAnswer]);
-
+}, [messageHistory, isTyping]);  
   useEffect(() => {
     if (
       currentQuestion?.answer_type === "text_area" &&
@@ -1022,7 +1042,7 @@ export default function AssessmentFormPage() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,#F3F8EF_0%,#ECF2E8_42%,#E4ECE0_100%)] px-3 py-4 md:px-6 md:py-6">
-      <div className="mx-auto flex h-[calc(100vh-2rem)] max-w-5xl flex-col gap-4 md:h-[calc(100vh-3rem)]">
+      <div className="mx-auto flex h-[calc(100vh-2rem)] max-w-3xl flex-col gap-4 md:h-[calc(100vh-3rem)]">
         <AssessmentChatProgress
           companyName={assessment?.company_name}
           progress={progress}
@@ -1031,57 +1051,83 @@ export default function AssessmentFormPage() {
         <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-[2rem] border border-[#D9E3D2] bg-[linear-gradient(180deg,rgba(255,255,255,0.95)_0%,rgba(246,250,243,0.98)_100%)] shadow-[0_24px_70px_rgba(26,36,33,0.08)]">
           <div
             ref={scrollRef}
-            className="min-h-0 flex-1 overflow-y-auto px-4 py-5 md:px-6"
+            className="flex-1 overflow-y-auto px-4 py-5 md:px-6 space-y-4"
+            style={{ maxHeight: "calc(100vh - 200px)" }}
           >
-            <div className="space-y-4">
-              {messageHistory.map((message) => (
-                <AssessmentChatMessage key={message.id} message={message} />
-              ))}
-
-              {isTyping && showTypingIndicator ? (
-                <div className="flex justify-start">
-                  <div className="inline-flex items-center gap-3 rounded-[1.5rem] border border-[#E5E7EB] bg-white px-4 py-3 text-sm text-[#4B5563] shadow-[0_14px_34px_rgba(17,24,39,0.06)]">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#C5A04F] [animation-delay:-0.2s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#C5A04F] [animation-delay:-0.1s]" />
-                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#C5A04F]" />
-                    </div>
-                    <span className="font-medium">Assistant is typing</span>
-                    <LoaderCircle className="h-4 w-4 animate-spin text-[#98A2B3]" />
-                  </div>
+                      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4">
+            <AnimatePresence initial={false}>
+  {messageHistory.map((message) => (
+    <motion.div
+      key={message.id}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
+      className={`flex w-full ${
+        message.type === "user_answer"
+          ? "justify-end"
+          : "justify-start"
+      }`}
+    >
+      <div
+        className={`
+          max-w-[75%] px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm
+          ${
+            message.type === "user_answer"
+              ? "bg-[#1A2421] text-white rounded-br-md"
+              : "bg-white border border-gray-200 text-gray-800 rounded-bl-md"
+          }
+        `}
+      >
+        {message.text}
+      </div>
+    </motion.div>
+  ))}
+</AnimatePresence>
+            <div ref={bottomRef} />
+          </div>
+{isTyping ? (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="flex justify-start"
+  >
+    <div className="bg-white border border-gray-200 px-4 py-3 rounded-2xl text-sm text-gray-500 flex gap-1 items-center">
+      <span className="h-2 w-2 bg-gray-400 rounded-full animate-bounce" />
+      <span className="h-2 w-2 bg-gray-400 rounded-full animate-bounce [animation-delay:150ms]" />
+      <span className="h-2 w-2 bg-gray-400 rounded-full animate-bounce [animation-delay:300ms]" />
+      <span className="ml-2">Thinking...</span>
+    </div>
+  </motion.div>
+) : null}            {finished ? (
+              <div className="rounded-[1.5rem] border border-[#CFE2CA] bg-[#F5FBF2] p-4">
+                <p className="text-sm font-semibold text-[#244234]">
+                  Assessment complete
+                </p>
+                <p className="mt-1 text-sm leading-6 text-[#4B6557]">
+                  Your responses are ready. Submit now to generate axis scores
+                  and recommendations.
+                </p>
+                <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end">
+                  <button
+                    type="button"
+                    onClick={handleBack}
+                    className="inline-flex h-11 items-center justify-center rounded-full border border-[#B9D2B2] bg-white px-5 text-sm font-semibold text-[#244234]"
+                  >
+                    Go back one step
+                  </button>
+                  <button
+                    type="button"
+                    disabled={submitting}
+                    onClick={handleSubmit}
+                    className="inline-flex h-11 items-center justify-center rounded-full bg-[#1A2421] px-5 text-sm font-semibold text-white disabled:opacity-70"
+                  >
+                    {submitting ? "Generating results..." : "Finish and see results"}
+                  </button>
                 </div>
-              ) : null}
-
-              {finished ? (
-                <div className="rounded-[1.5rem] border border-[#CFE2CA] bg-[#F5FBF2] p-4">
-                  <p className="text-sm font-semibold text-[#244234]">
-                    Assessment complete
-                  </p>
-                  <p className="mt-1 text-sm leading-6 text-[#4B6557]">
-                    Your responses are ready. Submit now to generate axis scores
-                    and recommendations.
-                  </p>
-                  <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end">
-                    <button
-                      type="button"
-                      onClick={handleBack}
-                      className="inline-flex h-11 items-center justify-center rounded-full border border-[#B9D2B2] bg-white px-5 text-sm font-semibold text-[#244234]"
-                    >
-                      Go back one step
-                    </button>
-                    <button
-                      type="button"
-                      disabled={submitting}
-                      onClick={handleSubmit}
-                      className="inline-flex h-11 items-center justify-center rounded-full bg-[#1A2421] px-5 text-sm font-semibold text-white disabled:opacity-70"
-                    >
-                      {submitting ? "Generating results..." : "Finish and see results"}
-                    </button>
-                  </div>
-                </div>
-              ) : null}
-              <div ref={bottomRef} />
-            </div>
+              </div>
+            ) : null}
+            <div ref={bottomRef} />
           </div>
 
           <div className="relative z-10 shrink-0 border-t border-[#DCE5D7] bg-[linear-gradient(180deg,rgba(246,250,243,0)_0%,rgba(246,250,243,0.92)_16%,rgba(255,255,255,0.98)_100%)] backdrop-blur">
@@ -1101,24 +1147,83 @@ export default function AssessmentFormPage() {
               />
             ) : null}
 
-            <AssessmentChatComposer
-              value={composerValue}
-              onChange={(value) => {
-                setComposerValue(value);
-                if (currentQuestion?.answer_type === "text_area") {
-                  setSelectedAnswer(value);
-                }
-              }}
-              onSend={handleComposerSend}
-              onBack={handleBack}
-              onRestart={handleRestart}
-              disabled={isTyping || submitting}
-              canGoBack={path.length > 1}
-              placeholder={composerPlaceholder}
-            />
+  <div className="border-t border-gray-200 bg-white p-4">
+
+  {/* CONTROL BAR (Back / Restart) */}
+  <div className="flex items-center justify-between px-2 pb-2">
+    <button
+      onClick={handleBack} 
+      disabled={path.length <= 1 || isTyping}
+      className="text-xs font-medium text-gray-500 hover:text-gray-900 transition disabled:opacity-40"
+    >
+      ← Back
+    </button>
+
+    <button
+      onClick={handleRestart}
+      disabled={isTyping}
+      className="text-xs font-medium text-gray-500 hover:text-red-500 transition disabled:opacity-40"
+    >
+      Restart
+    </button>
+  </div>
+
+  {/* INPUT ROW */}
+  <div className="flex gap-2 items-end max-w-3xl mx-auto">
+    
+    <textarea
+      value={composerValue}
+      onChange={(e) => setComposerValue(e.target.value)}
+      placeholder={composerPlaceholder}
+      className="
+        flex-1 resize-none rounded-xl border border-gray-300
+        px-4 py-3 text-sm
+        focus:outline-none focus:ring-2 focus:ring-[#1A2421]
+        shadow-sm
+      "
+      rows={1}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          handleComposerSend();
+        }
+      }}
+    />
+
+    <button
+      onClick={handleComposerSend}
+      disabled={isTyping || submitting}
+      className="
+        bg-[#1A2421] text-white px-4 py-3 rounded-xl text-sm
+        hover:opacity-90 transition
+        disabled:opacity-50
+      "
+    >
+      Send
+    </button>
+
+  </div>
+</div>         
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+const AssessmentChatProgress = ({ companyName, progress }: { companyName?: string; progress: AssessmentChatProgressType }) => (
+  <div className="flex flex-col gap-2">
+    <div className="text-sm font-medium text-[#4B5563]">
+      {companyName ? `Assessing ${companyName}` : "Assessment Progress"}
+    </div>
+    <div className="relative w-full h-2 bg-[#E5E7EB] rounded-full">
+      <div
+        className="absolute top-0 left-0 h-full bg-[#3858E9] rounded-full transition-all"
+        style={{ width: `${progress.percentage}%` }}
+      />
+    </div>
+    <div className="text-xs text-[#6B7280]">
+      {progress.label}
+    </div>
+  </div>
+);

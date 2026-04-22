@@ -1259,5 +1259,15 @@
       "selected_option_label": "We rarely go back and check",
       "next_question_id": "Q12"
     }
-  ]
+  ],
+  "benchmark_layer": {
+  "purpose": "Compare internal maturity results with real-world tools and competitors",
+  "dimensions": [
+    "Manage",
+    "Analyze",
+    "Improve"
+  ],
+  "benchmark_sources": [],
+  "mapping_rules": []
+}
 }

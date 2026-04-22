@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
+    "assistant-ui": "^0.0.89",
     "flowbite": "^4.0.1",
     "flowbite-react": "^0.12.17",
+    "framer-motion": "^12.38.0",
     "lucide-react": "^1.7.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
